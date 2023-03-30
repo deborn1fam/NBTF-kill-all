@@ -1,0 +1,496 @@
+local OrionLib = loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexware/Orion/main/source")))()
+
+local Window =
+    OrionLib:MakeWindow(
+    {Name = "The NBTF OP Hacker", HidePremium = false, SaveConfig = false, ConfigFolder = "Orion_NBTF"}
+)
+
+local Tab =
+    Window:MakeTab(
+    {
+        Name = "Exploits",
+        Icon = "rbxassetid://4483345998",
+        PremiumOnly = false
+    }
+)
+
+local Section =
+    Tab:AddSection(
+    {
+        Name = "Main Exploits"
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Kill Non-Team",
+        Callback = function()
+            for count = 1, 10 do
+                local guns = {
+                    "Imaginary Gun",
+                    "M4 Carbine",
+                    "USP",
+                    "Spy USP",
+                    "AK74",
+                    "Colt Python",
+                    "USP Silenced",
+                    "M24 Sniper",
+                    "UMP-9",
+                    "MPX",
+                    "XM1014"
+                }
+                local targets = {""}
+                local killall = true
+                for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                    if table.find(targets, v.Name) ~= nil or killall == true then
+                        if v.Character then
+                            for i2, v2 in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                                if table.find(guns, v2.Name) ~= nil then
+                                    local gun = v2.Name
+                                    local args = {
+                                        [1] = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(gun),
+                                        [2] = {
+                                            ["p"] = Vector3.new(0, 0, 0),
+                                            ["pid"] = 1,
+                                            ["part"] = game:GetService("Players")[v.Name].Character.Head,
+                                            ["d"] = 0,
+                                            ["maxDist"] = 0,
+                                            ["h"] = game:GetService("Players")[v.Name].Character.Head,
+                                            ["m"] = Enum.Material.Plastic,
+                                            ["sid"] = 2,
+                                            ["t"] = 0,
+                                            ["n"] = Vector3.new(0, 0, 0)
+                                        }
+                                    }
+
+                                    game:GetService("ReplicatedStorage").WeaponsSystem.Network.WeaponHit:FireServer(
+                                        unpack(args)
+                                    )
+                                end
+                            end
+                        end
+                    end
+                end
+            end
+
+            OrionLib:MakeNotification(
+                {
+                    Name = "Killer.exe",
+                    Content = "Killed Non-Team Members Instantly",
+                    Image = "rbxassetid://4483345998",
+                    Time = 3
+                }
+            )
+        end
+    }
+)
+
+Tab:AddParagraph("WARNING", "Username Needs To Be Exact!")
+
+Tab:AddTextbox(
+    {
+        Name = "Kill Single Person",
+        Default = "",
+        TextDisappear = true,
+        Callback = function(Value)
+            for count = 1, 10 do
+                local guns = {
+                    "Imaginary Gun",
+                    "M4 Carbine",
+                    "USP",
+                    "Spy USP",
+                    "AK74",
+                    "Colt Python",
+                    "USP Silenced",
+                    "M24 Sniper",
+                    "UMP-9",
+                    "MPX",
+                    "XM1014"
+                }
+                local targets = {Value}
+                local killall = false
+                for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                    if table.find(targets, v.Name) ~= nil or killall == true then
+                        for i2, v2 in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                            if table.find(guns, v2.Name) ~= nil then
+                                local gun = v2.Name
+                                local args = {
+                                    [1] = game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(gun),
+                                    [2] = {
+                                        ["p"] = Vector3.new(0, 0, 0),
+                                        ["pid"] = 1,
+                                        ["part"] = game:GetService("Players")[v.Name].Character.Head,
+                                        ["d"] = 0,
+                                        ["maxDist"] = 0,
+                                        ["h"] = game:GetService("Players")[v.Name].Character.Head,
+                                        ["m"] = Enum.Material.Plastic,
+                                        ["sid"] = 2,
+                                        ["t"] = 0,
+                                        ["n"] = Vector3.new(0, 0, 0)
+                                    }
+                                }
+
+                                game:GetService("ReplicatedStorage").WeaponsSystem.Network.WeaponHit:FireServer(
+                                    unpack(args)
+                                )
+                            end
+                        end
+                    end
+                end
+            end
+            OrionLib:MakeNotification(
+                {
+                    Name = "Killer.exe",
+                    Content = "Killed " .. Value,
+                    Image = "rbxassetid://4483345998",
+                    Time = 3
+                }
+            )
+        end
+    }
+)
+
+Tab:AddDropdown(
+    {
+        Name = "Change Rank",
+        Default = "Intern",
+        Options = {
+            "Intern",
+            "Novice",
+            "Talented",
+            "Proficient",
+            "Intermediate",
+            "Experienced",
+            "Seasoned",
+            "Advanced",
+            "Senior",
+            "Expert",
+            "Enthusiast",
+            "Superior",
+            "Veteran",
+            "Principal",
+            "Distinguished",
+            "Elite",
+            "Master",
+            "Grandmaster",
+            "True Grandmaster",
+            "Legendary",
+            "Chosen",
+            "Ultimate"
+        },
+        Callback = function(Value)
+            local args = {
+                [1] = Value
+            }
+
+            game:GetService("ReplicatedStorage").ChangeRank:FireServer(unpack(args))
+        end
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Mod Guns (Inf Ammo Only Imaginary Gun)",
+        Callback = function()
+            local guns = {
+                "Imaginary Gun",
+                "M4 Carbine",
+                "USP",
+                "Spy USP",
+                "AK74",
+                "Colt Python",
+                "USP Silenced",
+                "M24 Sniper",
+                "UMP-9",
+                "MPX",
+                "XM1014"
+            }
+
+            local nothingvalues = {
+                "RecoilDecay",
+                "RecoilMax",
+                "RecoilMin",
+                "ShotCooldown",
+                "TotalRecoilMax",
+                "MaxSpread",
+                "MinSpread"
+            }
+
+            local infvalues = {"AmmoCapacity", "AmmoReserves", "FullMagazineSize", "HitDamage", "MaxDistance"}
+
+            for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if table.find(guns, v.Name) ~= nil then
+                    for i2, v2 in pairs(v.Configuration:GetChildren()) do
+                        if table.find(nothingvalues, v2.Name) ~= nil then
+                            v2.Value = 0
+                        end
+                        if table.find(infvalues, v2.Name) ~= nil then
+                            v2.Value = 9999999999999999
+                        end
+                    end
+                end
+            end
+        end
+    }
+)
+
+local Section =
+    Tab:AddSection(
+    {
+        Name = "Other Exploits"
+    }
+)
+
+Tab:AddSlider(
+    {
+        Name = "Speed omg ;o",
+        Min = 0,
+        Max = 300,
+        Default = 16,
+        Increment = 1,
+        ValueName = "sped",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+        end
+    }
+)
+
+Tab:AddSlider(
+    {
+        Name = "Bunny hop powre lel",
+        Min = 0,
+        Max = 300,
+        Default = 50,
+        Increment = 1,
+        ValueName = "jumpy",
+        Callback = function(Value)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = Value
+        end
+    }
+)
+
+Tab:AddToggle(
+    {
+        Name = "Invis XDDD",
+        Default = false,
+        Callback = function(Value)
+            if Value == true then
+                local savedpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                wait()
+                game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-25.95, 84, 3537.55))
+                wait(.15)
+                local Seat = Instance.new("Seat", game.Workspace)
+                Seat.Anchored = false
+                Seat.CanCollide = false
+                Seat.Name = "invischair"
+                Seat.Transparency = 1
+                Seat.Position = Vector3.new(-25.95, 84, 3537.55)
+                local Weld = Instance.new("Weld", Seat)
+                Weld.Part0 = Seat
+                Weld.Part1 =
+                    game.Players.LocalPlayer.Character:FindFirstChild("Torso") or
+                    game.Players.LocalPlayer.Character.UpperTorso
+                wait()
+                Seat.CFrame = savedpos
+                OrionLib:MakeNotification(
+                    {
+                        Name = "Invis System 3000",
+                        Content = "Invis on LETS GOO XDDD",
+                        Time = 5
+                    }
+                )
+            else
+                if workspace:FindFirstChild("invischair") ~= nil then
+                    workspace:FindFirstChild("invischair"):Remove()
+                end
+                OrionLib:MakeNotification(
+                    {
+                        Name = "Invis System 3000",
+                        Content = "Invis off ;c",
+                        Time = 5
+                    }
+                )
+            end
+        end
+    }
+)
+
+Tab:AddToggle(
+    {
+        Name = "Lag Switch-o-tron",
+        Default = false,
+        Callback = function(Value)
+            setting = settings().Network
+
+            local Effect = Instance.new("ColorCorrectionEffect")
+            Effect.Name = "Lag_Effect"
+            Effect.Parent = game.Lighting
+            Effect.Saturation = -1
+            Effect.Brightness = 0
+            Effect.Contrast = 0
+            Effect.Enabled = false
+
+            toggle = Value
+
+            if toggle == true then
+                setting.IncomingReplicationLag = 1000
+                Effect.Enabled = true
+                toggle = true
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed =
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed * 2
+                OrionLib:MakeNotification(
+                    {
+                        Name = "Lag Switch-o-tron",
+                        Content = "Lag on LETS GOO XDDD",
+                        Time = 5
+                    }
+                )
+            else
+                setting.IncomingReplicationLag = 0
+                for i, v in pairs(game.Lighting:GetChildren()) do
+                    if v.Name == "Lag_Effect" then
+                        v:Destroy()
+                    end
+                end
+                game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                OrionLib:MakeNotification(
+                    {
+                        Name = "Lag Switch-o-tron",
+                        Content = "Lag off ;c",
+                        Time = 5
+                    }
+                )
+            end
+        end
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Low Graphics LOL",
+        Callback = function()
+            local decalsyeeted = true
+            local g = game
+            local w = g.Workspace
+            local l = g.Lighting
+            local t = w.Terrain
+            t.WaterWaveSize = 0
+            t.WaterWaveSpeed = 0
+            t.WaterReflectance = 0
+            t.WaterTransparency = 0
+            l.GlobalShadows = false
+            l.FogEnd = 9e9
+            l.Brightness = 0
+            settings().Rendering.QualityLevel = "Level01"
+            for i, v in pairs(g:GetDescendants()) do
+                if v:IsA("Part") or v:IsA("Union") or v:IsA("CornerWedgePart") or v:IsA("TrussPart") then
+                    v.Material = "Plastic"
+                    v.Reflectance = 0
+                elseif v:IsA("Decal") or v:IsA("Texture") and decalsyeeted then
+                    v.Transparency = 1
+                elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                    v.Lifetime = NumberRange.new(0)
+                elseif v:IsA("Explosion") then
+                    v.BlastPressure = 1
+                    v.BlastRadius = 1
+                elseif v:IsA("Fire") or v:IsA("SpotLight") or v:IsA("Smoke") or v:IsA("Sparkles") then
+                    v.Enabled = false
+                elseif v:IsA("MeshPart") then
+                    v.Material = "Plastic"
+                    v.Reflectance = 0
+                    v.TextureID = 10385902758728957
+                end
+            end
+            for i, e in pairs(l:GetChildren()) do
+                if
+                    e:IsA("BlurEffect") or e:IsA("SunRaysEffect") or e:IsA("ColorCorrectionEffect") or
+                        e:IsA("BloomEffect") or
+                        e:IsA("DepthOfFieldEffect")
+                 then
+                    e.Enabled = false
+                end
+            end
+
+            OrionLib:MakeNotification(
+                {
+                    Name = "Low Graphics 6000",
+                    Content = "Just fucked ur game LOL (Expected 20 FPS improvement)",
+                    Time = 5
+                }
+            )
+        end
+    }
+)
+
+local Section =
+    Tab:AddSection(
+    {
+        Name = "Other Scripts"
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Load Domain X (Chad Script)",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/DomainX/main/source", true))()
+        end
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Load Domain X FPS Counter",
+        Callback = function()
+            loadstring(game:HttpGet(("https://raw.githubusercontent.com/shlexsoftworks/fps/main/Main"), true))()
+        end
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Load IY Admin",
+        Callback = function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+        end
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Load Chat Translator",
+        Callback = function()
+            loadstring(game:HttpGetAsync("https://i.qts.life/r/ChatInlineTranslator.lua", true))()
+        end
+    }
+)
+
+Tab:AddButton(
+    {
+        Name = "Load Old Roblox Console",
+        Callback = function()
+            local _, str =
+                pcall(
+                function()
+                    return game:HttpGet("https://pastebin.com/raw/i35eCznS", true)
+                end
+            )
+
+            local s, e = loadstring(str)
+            if typeof(s) ~= "function" then
+                return
+            end
+
+            local success, message = pcall(s)
+            if (not success) then
+                if printconsole then
+                    printconsole(message)
+                elseif printoutput then
+                    printoutput(message)
+                end
+            end
+        end
+    }
+)
+
+OrionLib:Init()
